@@ -2,7 +2,7 @@
 Rule writing with Suricata to alert on rule match in the provided network file.
 
 ## Activities
-- Detect windows updates
+- **Detect windows updates**
 <pre>
 alert tcp 10.5.24.101 any -> any 80 (msg:"Windows Update";\
   flow:from_client,established;\
@@ -12,7 +12,7 @@ alert tcp 10.5.24.101 any -> any 80 (msg:"Windows Update";\
   sid:1000001; rev:1;
 </pre>
 
-- Detect executable file being downloaded using flowbits
+- **Detect executable file being downloaded using flowbits**
 <pre>
 alert tcp 10.11.6.101 any -> 212.47.220.51 80 (msg:"Suspicious file request";\
   flow:to_server,established;
@@ -28,7 +28,7 @@ alert tcp 212.47.220.51 80 -> 10.11.6.101 any (msg: "Suspicious File Download";\
   sid:1000003; rev:1;
 </pre>
 
-- Detect access of share on a domain controller with path to assumed malware.
+- **Detect access of share on a domain controller with path to assumed malware.**
 <pre>
 alert tcp any any -> any any (msg:"Malware in domain controller";\
   flow:to_server,established;\
@@ -36,7 +36,7 @@ alert tcp any any -> any any (msg:"Malware in domain controller";\
   sid:1000003; rev:1;)
 </pre>
 
-- Identify executable file framed as portable network graphics.
+- **Identify executable file framed as portable network graphics.**
 <pre>
 alert tcp any any -> any 80 (msg:"Image request";\
   flow:to_server,established;\
@@ -52,7 +52,7 @@ alert tcp any 80 -> any any (msg:"Malicious file download";\
   sid:1000005; rev:1;)
 </pre>
 
-- Capturing C2 communication occurred over http
+- **Capturing C2 communication occurred over http**
 <p>We could match on the plaintext content in the body.</p>
 <pre>
 alert tcp 192.168.1.5 1337 -> 192.168.1.10 any (msg:"C2 communication";\
@@ -67,7 +67,7 @@ alert tcp 192.168.1.10 any -> 192.168.1.5 1337 (msg:"C2 communication";\
   sid:1000007; rev:1;)
 </pre>
 
-- Capturing C2 communication occurred over TLS 1.2
+- **Capturing C2 communication occurred over TLS 1.2**
 <p>The content of the body would be encrypted for TLS 1.2. However, metadata information would still be in plaintext, so we could use Certificate Authority details to identify the C2 channel.</p>
 <pre>
 alert tcp 192.168.1.5 1337 -> 192.168.1.10 any (msg:"Self signed certificate";\
@@ -77,7 +77,7 @@ alert tcp 192.168.1.5 1337 -> 192.168.1.10 any (msg:"Self signed certificate";\
   sid:1000008; rev:1;)
 </pre>
 
-- Capturing C2 communication occurred over TLS 1.3
+- **Capturing C2 communication occurred over TLS 1.3**
 <p>As TLS 1.3 encrypts both the data and most of the metadata, it was difficult to write a good rule.
 First thing is to find the common terms within all the message relays that occurred between the
 server and the client. However, there was this unique JA3 and JA3S hashes for fingerprinting
