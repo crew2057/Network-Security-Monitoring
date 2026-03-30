@@ -1,7 +1,7 @@
 ## Objective
 Using Wireshark to search through a traffic capture and derive conclusions about the packets that are captured.
 
-## Tasks
+## Activities
 - **Determine the client recording the capture.**
 <img src="https://i.postimg.cc/kXZGtmC2/Screenshot-2026-03-29-at-19-19-23.png" />
 <p>192.168.1.6 seems to be our client as it is engaged in almost 100% of conversations that we captured. We can observe this data from IPV4 statistics.</p>
